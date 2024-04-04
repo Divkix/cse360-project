@@ -1,4 +1,4 @@
-package me.divkix.cse360project;
+package me.divkix.cse360project.helperFunctions;
 
 // Importing necessary libraries
 import java.sql.*;
@@ -13,11 +13,7 @@ public class sqlHelper {
         // Registering the MySQL JDBC driver
         Class.forName("com.mysql.cj.jdbc.Driver");
         // Returning a connection to the database
-        return DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/healnet_health_system?useSSL=false",
-                "root",
-                "password"
-        );
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/healnet_health_system?useSSL=false", "root", "password");
     }
 
     // Method to save data to the database
