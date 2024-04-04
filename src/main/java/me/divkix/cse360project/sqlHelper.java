@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Class to handle SQL queries
-public class sql_helper {
+public class sqlHelper {
 
     // Method to establish a connection to the database
     private static Connection getConnection() throws SQLException, ClassNotFoundException {

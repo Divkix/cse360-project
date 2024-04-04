@@ -13,8 +13,8 @@ import javafx.stage.Stage;
 import java.sql.*;
 
 // Import the static methods from the sql_helper class
-import static me.divkix.cse360project.sql_helper.getData;
-import static me.divkix.cse360project.sql_helper.saveData;
+import static me.divkix.cse360project.sqlHelper.getData;
+import static me.divkix.cse360project.sqlHelper.saveData;
 
 // Main class
 public class Healnet extends Application {
