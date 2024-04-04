@@ -23,12 +23,6 @@ public class Healnet extends Application {
     private static final String layoutStyleString = "-fx-padding: 20; -fx-alignment: center;"; // Add padding and center the components
     private static final String patient_intake_db_table = "patient_intake";
     private static final String patient_results_db_table = "patient_results";
-    public static sql_helper.DatabaseConnection DatabaseConnection;
-
-    // Main method to launch the application
-    public static void main(String[] args) {
-        launch(args);
-    }
 
     // Start method to build the initial view
     @Override
@@ -232,7 +226,7 @@ public class Healnet extends Application {
 
         // retrieve patient information from the database
         try {
-            ResultSet patientResults = getData(patient_results_db_table, String.valueOf(insuranceOrPatientId));
+            ResultSet patientResults = getData(patient_results_db_table, insuranceOrPatientId);
             if (patientResults.next()) { // Move the cursor to the first row
                 totalAgatstonCACScore = patientResults.getDouble("agaston_cac_score");
                 lmScore = patientResults.getDouble("lm_score");
@@ -294,5 +288,10 @@ public class Healnet extends Application {
         // Set the scene with height and width
         Scene loadPatientResultsScene = new Scene(loadPatientResults, 600, 600);
         primaryStage.setScene(loadPatientResultsScene); // Set the scene
+    }
+
+    // Main method to launch the application
+    public static void main(String[] args) {
+        launch(args);
     }
 }
