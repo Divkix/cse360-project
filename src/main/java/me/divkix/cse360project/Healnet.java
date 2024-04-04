@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.sql.*;
 
+// Import the static methods from the sql_helper class
 import static me.divkix.cse360project.sql_helper.getData;
 import static me.divkix.cse360project.sql_helper.saveData;
 
@@ -19,7 +20,7 @@ import static me.divkix.cse360project.sql_helper.saveData;
 public class Healnet extends Application {
 
     // Constants
-    private static final String setStyleButtonString = "-fx-font-size: 16pt; -fx-background-color: rgb(54, 94, 187); -fx-text-fill: black;"; // Set the font size and background color
+    static final String setStyleButtonString = "-fx-font-size: 16pt; -fx-background-color: rgb(54, 94, 187); -fx-text-fill: black;"; // Set the font size and background color
     private static final String layoutStyleString = "-fx-padding: 20; -fx-alignment: center;"; // Add padding and center the components
     private static final String patient_intake_db_table = "patient_intake";
     private static final String patient_results_db_table = "patient_results";
@@ -67,7 +68,6 @@ public class Healnet extends Application {
         return mainScreenLayout;
     }
 
-    // Method to switch to patient intake form when the patient intake button is clicked
     private void switchToPatientIntake(Stage primaryStage) {
         GridPane patientIntakeLayout = new GridPane(); // Create a GridPane layout
         patientIntakeLayout.setHgap(10); // Set horizontal gap
