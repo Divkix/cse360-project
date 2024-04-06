@@ -9,7 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import me.divkix.cse360project.screens.patientIntake;
+import me.divkix.cse360project.screens.EmployeeLogin;
+import me.divkix.cse360project.screens.pateintSignUp;
+import me.divkix.cse360project.screens.patientLogin;
 import me.divkix.cse360project.screens.patientView;
 
 // Main class
@@ -51,31 +53,46 @@ public class Healnet extends Application {
         titleLabel.setStyle("-fx-font-size: 16pt;"); // Set the font size
 
         // Patient Intake button
-        Button patientIntakeButton = new Button("Patient Intake"); // Create a button
-        patientIntakeButton.setStyle(setStyleButtonString); // Set the font size and background color
-        patientIntakeButton.setPrefWidth(250); // Set the button width
-        patientIntakeButton.setOnAction(e -> switchToPatientIntake(primaryStage)); // Switch to patient intake form
+        Button patientLoginButton = new Button("Patient Login"); // Create a button
+        patientLoginButton.setStyle(setStyleButtonString); // Set the font size and background color
+        patientLoginButton.setPrefWidth(250); // Set the button width
+        patientLoginButton.setOnAction(e -> switchToPatientLoginScreen(primaryStage)); // Switch to patient login form
 
         // Patient View Screen
-        Button patientViewButton = new Button("Patient View"); // Create a button
+        Button patientViewButton = new Button("Employee Login"); // Create a button
         patientViewButton.setStyle(setStyleButtonString); // Set the font size
         patientViewButton.setPrefWidth(250); // Set the button width
-        patientViewButton.setOnAction(e -> switchToPatientView(primaryStage)); // Switch to patient view
+        patientViewButton.setOnAction(e -> switchToEmployeeLoginScreen(primaryStage)); // Switch to patient view
 
         // Add the components to the layout
-        mainScreenLayout.getChildren().addAll(titleLabel, patientIntakeButton, patientViewButton);
+        mainScreenLayout.getChildren().addAll(titleLabel, patientLoginButton, patientViewButton);
 
         // Return the layout
         return mainScreenLayout;
     }
 
-    private void switchToPatientIntake(Stage primaryStage) {
-        GridPane patientIntakeScreenClass = new patientIntake().patientIntakeScreenClass(primaryStage); // Create a GridPane layout
+    private void switchToPatientLoginScreen(Stage primaryStage) {
+        VBox patientLoginScreen = new patientLogin().patientLoginScreen(primaryStage); // Create a GridPane layout
+
+        // Set the scene with height and width
+        Scene patientIntakeScene = new Scene(patientLoginScreen, 600, 600);
+        primaryStage.setScene(patientIntakeScene); // Set the scene
+    }
+
+    private void switchToEmployeeLoginScreen(Stage primaryStage) {
+        VBox employeeLoginScreen = new EmployeeLogin().employeeLoginScreen(primaryStage); // Create a GridPane layout
+
+        // Set the scene with height and width
+        Scene patientIntakeScene = new Scene(employeeLoginScreen, 600, 600);
+        primaryStage.setScene(patientIntakeScene); // Set the scene
+    }
+
+    private void switchToPatientSignUpScreen(Stage primaryStage) {
+        GridPane patientIntakeScreenClass = new pateintSignUp().patientSignUpScreen(primaryStage); // Create a GridPane layout
 
         // Set the scene with height and width
         Scene patientIntakeScene = new Scene(patientIntakeScreenClass, 600, 600);
         primaryStage.setScene(patientIntakeScene); // Set the scene
-
     }
 
     // Method to switch to patient information view
