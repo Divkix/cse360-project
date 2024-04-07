@@ -10,14 +10,11 @@ public class sqlHelpers {
 
     // Database name
     private static final String databaseName = "healnet.db";
+    private static final String connectionString = "jdbc:sqlite:" + databaseName;
 
     // Method to create a new database
     public static void createNewDatabase() {
-        // SQLite connection string
-        String url = "jdbc:sqlite:" + databaseName;
-
-        // Try to connect to the database
-        try (Connection conn = DriverManager.getConnection(url)) {
+        try (Connection conn = DriverManager.getConnection(connectionString)) {
             if (conn != null) {
                 // If the connection is successful, print a message
                 System.out.println("A new database has been created.");
@@ -31,9 +28,6 @@ public class sqlHelpers {
 
     // Method to create a new table with the given columns
     public static void createNewTable(String tableName, Map<String, String> columns) {
-        // SQLite connection string
-        String url = "jdbc:sqlite:" + databaseName;
-
         // Build the SQL statement dynamically
         StringBuilder sql = new StringBuilder("CREATE TABLE IF NOT EXISTS " + tableName + " (\n");
 
@@ -49,7 +43,7 @@ public class sqlHelpers {
         sql.append("\n);");
 
         // Try to connect to the database and create the table
-        try (Connection conn = DriverManager.getConnection(url);
+        try (Connection conn = DriverManager.getConnection(connectionString);
              // Create a new statement
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql.toString());
@@ -61,14 +55,11 @@ public class sqlHelpers {
 
     // Method to insert data into a table
     public static void insertData(String tableName, Map<String, String> data) {
-        // SQLite connection string
-        String url = "jdbc:sqlite:" + databaseName;
-
         // get the primary key
         String primaryKey = data.get("username");
 
         // Check if primary key already exists
-        try (Connection conn = DriverManager.getConnection(url);
+        try (Connection conn = DriverManager.getConnection(connectionString);
              PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM " + tableName + " WHERE username = ?")) {
 
             // Set the primary key value
@@ -112,7 +103,7 @@ public class sqlHelpers {
         sql.append(")");
 
         // Try to connect to the database and insert the data
-        try (Connection conn = DriverManager.getConnection(url);
+        try (Connection conn = DriverManager.getConnection(connectionString);
              // Create a new prepared statement
              PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
 
@@ -133,12 +124,10 @@ public class sqlHelpers {
     }
 
     public static Map<String, String> getDataUsingUsername(String tableName, String username) {
-        // SQLite connection string
-        String url = "jdbc:sqlite:" + databaseName;
         Map<String, String> data = new HashMap<>();
 
         // Try to connect to the database and get the data
-        try (Connection conn = DriverManager.getConnection(url);
+        try (Connection conn = DriverManager.getConnection(connectionString);
              // Create a new prepared statement
              PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM " + tableName + " WHERE username = ?")) {
 
@@ -173,12 +162,10 @@ public class sqlHelpers {
 
     // similar function like getDataUsingUsername but returns a list of maps
     public static List<Map<String, String>> getMultipleData(String tableName, String columnName, String columnValue) {
-        // SQLite connection string
-        String url = "jdbc:sqlite:" + databaseName;
         List<Map<String, String>> dataList = new ArrayList<>();
 
         // Try to connect to the database and get the data
-        try (Connection conn = DriverManager.getConnection(url);
+        try (Connection conn = DriverManager.getConnection(connectionString);
              // Create a new prepared statement
              PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM " + tableName + " WHERE " + columnName + " = ?")) {
 
@@ -215,9 +202,6 @@ public class sqlHelpers {
 
     // create a updateData function that takes in the table name, the primary key, and a map of the new data
     public static void updateData(String tableName, String primaryKey, Map<String, String> newData) {
-        // SQLite connection string
-        String url = "jdbc:sqlite:" + databaseName;
-
         // Build the SQL statement dynamically
         StringBuilder sql = new StringBuilder("UPDATE " + tableName + " SET ");
 
@@ -233,7 +217,7 @@ public class sqlHelpers {
         sql.append(" WHERE username = ?;");
 
         // Try to connect to the database and update the data
-        try (Connection conn = DriverManager.getConnection(url);
+        try (Connection conn = DriverManager.getConnection(connectionString);
              // Create a new prepared statement
              PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
 

@@ -10,9 +10,6 @@ public class checkLoginInfo {
         // Check if the username and password are correct by getting data from the database and comparing it
         Map<String, String> userDetails = sqlHelpers.getDataUsingUsername(userDetailsTable, username);
         // is the username is not found in the database, return false
-        if (userDetails.isEmpty()) {
-            return false;
-        }
-        return userDetails.get("password").equals(password);
+        return !userDetails.isEmpty() && userDetails.get("password").equals(password);
     }
 }
