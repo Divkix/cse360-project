@@ -5,9 +5,9 @@ module me.divkix.cse360project {
 
     opens me.divkix.cse360project to javafx.fxml;
 
+    // database
+    opens me.divkix.cse360project.helperFunctions to org.xerial.sqlite;
+
+
     exports me.divkix.cse360project;
-    exports me.divkix.cse360project.screens;
-    opens me.divkix.cse360project.screens to javafx.fxml;
-    exports me.divkix.cse360project.helperFunctions;
-    opens me.divkix.cse360project.helperFunctions to javafx.fxml;
 }
