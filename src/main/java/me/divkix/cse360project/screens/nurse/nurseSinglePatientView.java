@@ -36,7 +36,7 @@ public class nurseSinglePatientView {
         rightVBox.setSpacing(20); // Set the spacing between the components
         rightVBox.setPrefWidth(600); // Set the width of the vbox
         rightVBox.setStyle(layoutStyleString); // Add padding and center the components
-        rightVBox.setAlignment(Pos.CENTER); // Center the components
+        rightVBox.setAlignment(Pos.TOP_CENTER); // Center the components
 
         // get current details of the patient
         Map<String, String> patient = sqlHelpers.getDataUsingUsername(userDetailsTable, patientId);
