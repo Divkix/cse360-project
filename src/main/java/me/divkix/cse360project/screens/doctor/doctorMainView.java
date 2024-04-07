@@ -1,20 +1,11 @@
 package me.divkix.cse360project.screens.doctor;
 
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import me.divkix.cse360project.screens.nurse.nurseMainView;
 
 public class doctorMainView {
-    // Method to switch to the patient signup screen
+    // as doctor and nurse main views are the same, we can switch to the nurse main view
     public static void switchToDoctorMainView(Stage primaryStage) {
-        GridPane screen = new doctorMainView().doctorMainViewScreen(primaryStage);
-        primaryStage.getScene().setRoot(screen);
-    }
-
-    public GridPane doctorMainViewScreen(Stage primaryStage) {
-        GridPane doctorMainViewLayout = new GridPane(); // Create a GridPane layout
-        doctorMainViewLayout.setHgap(10); // Set horizontal gap
-        doctorMainViewLayout.setVgap(10); // Set vertical gap
-
-        return doctorMainViewLayout;
+        nurseMainView.switchToNurseMainView(primaryStage);
     }
 }

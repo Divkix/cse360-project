@@ -6,15 +6,15 @@ import javafx.stage.Stage;
 public class patientMainView {
     // Method to switch to the patient signup screen
     public static void switchToPatientMainView(Stage primaryStage) {
-        GridPane screen = new patientMainView().patientMainViewScreen(primaryStage);
+        GridPane screen = new patientMainView().screen(primaryStage);
         primaryStage.getScene().setRoot(screen);
     }
 
-    public GridPane patientMainViewScreen(Stage primaryStage) {
-        GridPane patientMainViewLayout = new GridPane(); // Create a GridPane layout
-        patientMainViewLayout.setHgap(10); // Set horizontal gap
-        patientMainViewLayout.setVgap(10); // Set vertical gap
+    public GridPane screen(Stage primaryStage) {
+        GridPane layout = new GridPane(); // Create a GridPane layout
+        layout.setHgap(10); // Set horizontal gap
+        layout.setVgap(10); // Set vertical gap
 
-        return patientMainViewLayout;
+        return layout;
     }
 }

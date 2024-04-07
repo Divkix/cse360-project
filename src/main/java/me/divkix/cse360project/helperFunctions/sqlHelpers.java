@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class sqlHelper {
+public class sqlHelpers {
 
     // Database name
     private static final String databaseName = "healnet.db";
@@ -132,7 +132,7 @@ public class sqlHelper {
         }
     }
 
-    public static Map<String, String> getData(String tableName, String username) {
+    public static Map<String, String> getDataUsingUsername(String tableName, String username) {
         // SQLite connection string
         String url = "jdbc:sqlite:" + databaseName;
         Map<String, String> data = new HashMap<>();
@@ -169,5 +169,90 @@ public class sqlHelper {
 
         // Return the map
         return data;
+    }
+
+    // similar function like getDataUsingUsername but returns a list of maps
+    public static List<Map<String, String>> getMultipleData(String tableName, String columnName, String columnValue) {
+        // SQLite connection string
+        String url = "jdbc:sqlite:" + databaseName;
+        List<Map<String, String>> dataList = new ArrayList<>();
+
+        // Try to connect to the database and get the data
+        try (Connection conn = DriverManager.getConnection(url);
+             // Create a new prepared statement
+             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM " + tableName + " WHERE " + columnName + " = ?")) {
+
+            // Set the column value
+            pstmt.setString(1, columnValue);
+
+            // Execute the query
+            ResultSet rs = pstmt.executeQuery();
+
+            // Get the column names
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            List<String> columnNames = new ArrayList<>();
+            for (int i = 1; i <= columnCount; i++) {
+                columnNames.add(rsmd.getColumnName(i));
+            }
+
+            // If a result is returned, add each column to the map
+            while (rs.next()) {
+                Map<String, String> data = new HashMap<>();
+                for (String cn : columnNames) {
+                    data.put(cn, rs.getString(cn));
+                }
+                dataList.add(data);
+            }
+        } catch (SQLException e) {
+            // If there is an error, print the error message
+            System.out.println(e.getMessage());
+        }
+
+        // Return the list of maps
+        return dataList;
+    }
+
+    // create a updateData function that takes in the table name, the primary key, and a map of the new data
+    public static void updateData(String tableName, String primaryKey, Map<String, String> newData) {
+        // SQLite connection string
+        String url = "jdbc:sqlite:" + databaseName;
+
+        // Build the SQL statement dynamically
+        StringBuilder sql = new StringBuilder("UPDATE " + tableName + " SET ");
+
+        // Add the columns to the SQL statement
+        for (Map.Entry<String, String> entry : newData.entrySet()) {
+            sql.append(entry.getKey()).append(" = ?, ");
+        }
+
+        // Remove the trailing comma and space
+        sql.setLength(sql.length() - 2);
+
+        // Add the WHERE clause
+        sql.append(" WHERE username = ?;");
+
+        // Try to connect to the database and update the data
+        try (Connection conn = DriverManager.getConnection(url);
+             // Create a new prepared statement
+             PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+
+            // Set the values dynamically
+            int i = 1;
+            for (String value : newData.values()) {
+                pstmt.setString(i++, value);
+            }
+
+            // Set the primary key value
+            pstmt.setString(i, primaryKey);
+
+            // Update the data
+            pstmt.executeUpdate();
+            // Print that the data has been updated
+            System.out.println("Data updated successfully.");
+        } catch (SQLException e) {
+            // If there is an error, print the error message
+            System.out.println(e.getMessage());
+        }
     }
 }

@@ -6,7 +6,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import me.divkix.cse360project.Healnet;
 import me.divkix.cse360project.helperFunctions.checkLoginInfo;
-import me.divkix.cse360project.helperFunctions.sqlHelper;
+import me.divkix.cse360project.helperFunctions.sqlHelpers;
 import me.divkix.cse360project.screens.doctor.doctorMainView;
 import me.divkix.cse360project.screens.nurse.nurseMainView;
 
@@ -17,15 +17,15 @@ import static me.divkix.cse360project.Healnet.*;
 public class employeeLogin {
     // Method to switch to the employee login screen
     public static void switchToEmployeeLoginScreen(Stage primaryStage) {
-        VBox screen = new employeeLogin().employeeLoginScreen(primaryStage);
+        VBox screen = new employeeLogin().screen(primaryStage);
         primaryStage.getScene().setRoot(screen);
     }
 
-    public VBox employeeLoginScreen(Stage primaryStage) {
+    public VBox screen(Stage primaryStage) {
         // create a vbox layout with 10 hgap and vgap and 1 text field, 1 password field, 1 button
-        VBox employeeLoginLayout = new VBox(35); // Create a layout with vertical spacing of 10
-        employeeLoginLayout.setAlignment(Pos.CENTER); // Center the components
-        employeeLoginLayout.setStyle(layoutStyleString); // Add padding and center the components
+        VBox layout = new VBox(35); // Create a layout with vertical spacing of 10
+        layout.setAlignment(Pos.CENTER); // Center the components
+        layout.setStyle(layoutStyleString); // Add padding and center the components
 
         // create a label called "Patient Login"
         Label titleLabel = new Label("Employee Login"); // Create a label
@@ -55,7 +55,7 @@ public class employeeLogin {
             boolean correctLogin = checkLoginInfo.checkLogin(employeeUniqueIDField.getText(), passwordField.getText());
             if (correctLogin) {
                 // get the type of role from database
-                Map<String, String> role = sqlHelper.getData(userDetailsTable, employeeUniqueIDField.getText());
+                Map<String, String> role = sqlHelpers.getDataUsingUsername(userDetailsTable, employeeUniqueIDField.getText());
                 // if the role is doctor, switch to doctor main view
                 if (role.get("role").equals("doctor")) {
                     doctorMainView.switchToDoctorMainView(primaryStage);
@@ -86,8 +86,8 @@ public class employeeLogin {
         backButton.setStyle(setStyleButtonString); // Set the font size
 
         // Add the components to the layout
-        employeeLoginLayout.getChildren().addAll(titleLabel, employeeIDLabel, employeeUniqueIDField, passwordLabel, passwordField, employeeLoginButton, backButton);
+        layout.getChildren().addAll(titleLabel, employeeIDLabel, employeeUniqueIDField, passwordLabel, passwordField, employeeLoginButton, backButton);
 
-        return employeeLoginLayout;
+        return layout;
     }
 }

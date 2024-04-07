@@ -13,15 +13,15 @@ import static me.divkix.cse360project.Healnet.setStyleButtonString;
 public class patientLogin {
     // Method to switch to the patient login screen
     public static void switchToPatientLoginScreen(Stage primaryStage) {
-        VBox screen = new patientLogin().patientLoginScreen(primaryStage);
+        VBox screen = new patientLogin().screen(primaryStage);
         primaryStage.getScene().setRoot(screen);
     }
 
-    public VBox patientLoginScreen(Stage primaryStage) {
+    public VBox screen(Stage primaryStage) {
         // create a vbox layout with 10 hgap and vgap and 1 text field, 1 password field, 1 button
-        VBox patientLoginLayout = new VBox(35); // Create a layout with vertical spacing of 10
-        patientLoginLayout.setAlignment(Pos.CENTER); // Center the components
-        patientLoginLayout.setStyle(layoutStyleString); // Add padding and center the components
+        VBox layout = new VBox(35); // Create a layout with vertical spacing of 10
+        layout.setAlignment(Pos.CENTER); // Center the components
+        layout.setStyle(layoutStyleString); // Add padding and center the components
 
         // create a label called "Patient Login"
         Label titleLabel = new Label("Patient Login"); // Create a label
@@ -80,9 +80,9 @@ public class patientLogin {
         backButton.setStyle(setStyleButtonString); // Set the font size
 
         // Add the components to the layout
-        patientLoginLayout.getChildren().addAll(titleLabel, patientIDLabel, patientUniqueIDField, passwordLabel, passwordField, patientLoginButton, patientSignupLabel, backButton);
+        layout.getChildren().addAll(titleLabel, patientIDLabel, patientUniqueIDField, passwordLabel, passwordField, patientLoginButton, patientSignupLabel, backButton);
 
         // Return the layout
-        return patientLoginLayout;
+        return layout;
     }
 }
