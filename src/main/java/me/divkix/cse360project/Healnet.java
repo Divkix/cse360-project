@@ -9,6 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import me.divkix.cse360project.screens.employeeLogin;
+import me.divkix.cse360project.screens.patientLogin;
+
 // Main class
 public class Healnet extends Application {
 
@@ -50,13 +53,13 @@ public class Healnet extends Application {
         Button patientLoginButton = new Button("Patient Login"); // Create a button
         patientLoginButton.setStyle(setStyleButtonString); // Set the font size and background color
         patientLoginButton.setPrefWidth(250); // Set the button width
-//        patientLoginButton.setOnAction(e -> switchToPatientLoginScreen(primaryStage)); // Switch to patient login form
+        patientLoginButton.setOnAction(e -> patientLogin.switchToPatientLoginScreen(primaryStage)); // Switch to patient login form
 
         // Patient View Screen
         Button patientViewButton = new Button("Employee Login"); // Create a button
         patientViewButton.setStyle(setStyleButtonString); // Set the font size
         patientViewButton.setPrefWidth(250); // Set the button width
-//        patientViewButton.setOnAction(e -> switchToEmployeeLoginScreen(primaryStage)); // Switch to patient view
+        patientViewButton.setOnAction(e -> employeeLogin.switchToEmployeeLoginScreen(primaryStage)); // Switch to patient view
 
         // Add the components to the layout
         mainScreenLayout.getChildren().addAll(titleLabel, patientLoginButton, patientViewButton);
