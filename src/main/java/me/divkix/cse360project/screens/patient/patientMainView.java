@@ -49,8 +49,8 @@ public class patientMainView {
         VBox leftVBox = new VBox();
         VBox rightVBox = new VBox();
 
-        addVisitsToVBox(leftVBox, previousVisits, "Previous Appointments");
-        addVisitsToVBox(rightVBox, upcomingVisits, "Upcoming Appointments");
+        addVisitsToVBox(leftVBox, previousVisits, "Previous Appointments", primaryStage);
+        addVisitsToVBox(rightVBox, upcomingVisits, "Upcoming Appointments", primaryStage);
 
         // Add the components to the layout
         hbox.getChildren().addAll(leftVBox, rightVBox);
@@ -58,7 +58,7 @@ public class patientMainView {
         return layout;
     }
 
-    private void addVisitsToVBox(VBox vBox, List<Map<String, String>> visits, String title) {
+    private void addVisitsToVBox(VBox vBox, List<Map<String, String>> visits, String title, Stage primaryStage) {
         // Create a title label
         Label titleLabel = new Label(title);
         titleLabel.setStyle("-fx-font-size: 16pt;");
@@ -71,12 +71,9 @@ public class patientMainView {
 
         // Loop through all the visits and add them to the VBox
         for (Map<String, String> visit : visits) {
-            Label visitLabel = new Label("•" + visit.get("visit_date") + " - " + visit.get("visit_reason"));
-            visitLabel.setStyle("-fx-font-size: 12pt;");
-            visitLabel.setOnMouseClicked(e -> {
-                // Handle the click event here
-                System.out.println("Clicked on visit: " + visit.get("visit_date"));
-            });
+            Label visitLabel = new Label("• " + visit.get("visit_date") + " - " + visit.get("visit_reason"));
+            visitLabel.setStyle("-fx-font-size: 14pt; -fx-text-fill: blue; -fx-underline: true;");
+            visitLabel.setOnMouseClicked(e -> patientVisitView.switchToPatientVisitView(primaryStage, visit.get("username"), visit.get("visit_id")));
             vBox.getChildren().add(visitLabel);
         }
     }

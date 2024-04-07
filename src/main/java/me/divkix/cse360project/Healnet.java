@@ -72,8 +72,8 @@ public class Healnet extends Application {
             put("doctor_username", "text NOT NULL");
             put("visit_date", "text NOT NULL");
             put("visit_reason", "text DEFAULT NULL");
-            put("diagnosis", "text DEFAULT NULL");
-            put("prescription", "text DEFAULT NULL");
+            put("diagnosis", "text DEFAULT 'TO BE DONE' NOT NULL");
+            put("prescription", "text DEFAULT 'PENDING' NOT NULL");
         }});
 
         // Add new patient
@@ -109,6 +109,13 @@ public class Healnet extends Application {
             put("visit_reason", "Annual checkup");
             put("diagnosis", "Healthy");
             put("prescription", "None");
+        }});
+        // Add upcoming visit for the patient
+        sqlHelpers.insertData(patientVisitsTable, new HashMap<>() {{
+            put("username", "doe_98765");
+            put("doctor_username", "jane_12345");
+            put("visit_date", "05/05/2024");
+            put("visit_reason", "Stomach Pain");
         }});
 
         // Add new doctor
