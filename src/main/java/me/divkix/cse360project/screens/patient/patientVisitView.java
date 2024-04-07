@@ -17,7 +17,7 @@ import static me.divkix.cse360project.Healnet.*;
 
 public class patientVisitView {
     // Method to switch to the patient signup screen
-    public static void switchToPatientVisitView(Stage primaryStage, String username, String visitId) {
+    public static void switchScreen(Stage primaryStage, String username, String visitId) {
         VBox screen = new patientVisitView().screen(primaryStage, username, visitId);
         primaryStage.getScene().setRoot(screen);
     }
@@ -29,8 +29,8 @@ public class patientVisitView {
         layout.setSpacing(15); // Set the spacing between the components
 
         // get the visit details from the database
-        List<Map<String, String>> visitDetails = sqlHelpers.getMultipleData(patientVisitsTable, "username", patientId);
-        Map<String, String> pateintInfo = sqlHelpers.getDataUsingUsername(userDetailsTable, patientId);
+        List<Map<String, String>> visitDetails = sqlHelpers.getMultipleDataFromTable(patientVisitsTable, "username", patientId);
+        Map<String, String> pateintInfo = sqlHelpers.getDataUsingUsernameFromTable(userDetailsTable, patientId);
 
         // Single Visit Details
         Map<String, String> singleVisitDetails = new HashMap<>();
@@ -81,7 +81,7 @@ public class patientVisitView {
         Button backButton = new Button("Back");
         backButton.setStyle(setStyleButtonString);
         backButton.setOnAction(e -> {
-            patientMainView.switchToPatientMainView(primaryStage, patientId);
+            patientMainView.switchScreen(primaryStage, patientId);
         });
 
         layout.getChildren().addAll(titleLabel, blankSpace, visitDetailslayout, backButton);

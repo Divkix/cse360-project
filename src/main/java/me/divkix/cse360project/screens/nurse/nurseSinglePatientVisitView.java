@@ -15,7 +15,7 @@ import java.util.Map;
 import static me.divkix.cse360project.Healnet.*;
 
 public class nurseSinglePatientVisitView {
-    public static void switchToNurseSinglePatientVisitView(Stage primaryStage, String patientId, String visitId) {
+    public static void switchScreen(Stage primaryStage, String patientId, String visitId) {
         VBox screen = new nurseSinglePatientVisitView().screen(primaryStage, patientId, visitId);
         primaryStage.getScene().setRoot(screen);
     }
@@ -27,8 +27,8 @@ public class nurseSinglePatientVisitView {
         layout.setSpacing(15); // Set the spacing between the components
 
         // get the visit details from the database
-        List<Map<String, String>> visitDetails = sqlHelpers.getMultipleData(patientVisitsTable, "username", patientId);
-        Map<String, String> pateintInfo = sqlHelpers.getDataUsingUsername(userDetailsTable, patientId);
+        List<Map<String, String>> visitDetails = sqlHelpers.getMultipleDataFromTable(patientVisitsTable, "username", patientId);
+        Map<String, String> pateintInfo = sqlHelpers.getDataUsingUsernameFromTable(userDetailsTable, patientId);
 
         // Single Visit Details
         Map<String, String> singleVisitDetails = new HashMap<>();
@@ -79,7 +79,7 @@ public class nurseSinglePatientVisitView {
         Button backButton = new Button("Back");
         backButton.setStyle(setStyleButtonString);
         backButton.setOnAction(e -> {
-            nurseSinglePatientView.switchToNurseSinglePatientView(primaryStage, patientId);
+            nurseSinglePatientView.switchScreen(primaryStage, patientId);
         });
 
         layout.getChildren().addAll(titleLabel, blankSpace, visitDetailslayout, backButton);

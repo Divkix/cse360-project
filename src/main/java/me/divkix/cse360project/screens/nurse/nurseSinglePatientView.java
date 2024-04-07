@@ -16,7 +16,7 @@ import static me.divkix.cse360project.Healnet.*;
 
 public class nurseSinglePatientView {
     // Method to switch to the patient signup screen
-    public static void switchToNurseSinglePatientView(Stage primaryStage, String patientId) {
+    public static void switchScreen(Stage primaryStage, String patientId) {
         VBox screen = new nurseSinglePatientView().screen(primaryStage, patientId);
         primaryStage.getScene().setRoot(screen);
     }
@@ -48,8 +48,8 @@ public class nurseSinglePatientView {
         rightVBox.setAlignment(Pos.TOP_CENTER); // Center the components
 
         // get current details of the patient
-        Map<String, String> patient = sqlHelpers.getDataUsingUsername(userDetailsTable, patientId);
-        Map<String, String> patientRecord = sqlHelpers.getDataUsingUsername(patientDetailsTable, patientId);
+        Map<String, String> patient = sqlHelpers.getDataUsingUsernameFromTable(userDetailsTable, patientId);
+        Map<String, String> patientRecord = sqlHelpers.getDataUsingUsernameFromTable(patientDetailsTable, patientId);
 
         // make a gridpane with the patient details
         // add the gridpane to the left vbox
@@ -127,7 +127,7 @@ public class nurseSinglePatientView {
             }
             String alertBoxString = "The fields are already up to date.";
             if (!newPatientRecord.equals(patientRecord)) {
-                sqlHelpers.updateData(patientDetailsTable, patientId, newPatientRecord);
+                sqlHelpers.updateDataIntoTable(patientDetailsTable, patientId, newPatientRecord);
                 alertBoxString = "Patient details have been updated successfully.";
             }
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -145,7 +145,7 @@ public class nurseSinglePatientView {
         visitsLabel.setStyle("-fx-font-size: 16pt;"); // Set the font size
 
         // get the list of visits for the patient
-        List<Map<String, String>> userVisits = sqlHelpers.getMultipleData(patientVisitsTable, "username", patientId);
+        List<Map<String, String>> userVisits = sqlHelpers.getMultipleDataFromTable(patientVisitsTable, "username", patientId);
 
         // create a vbox to hold the list of visits
         VBox visitList = new VBox(5); // Create a layout with vertical spacing of 5
@@ -160,7 +160,7 @@ public class nurseSinglePatientView {
                 visitLabel.setStyle("-fx-font-size: 14pt; -fx-text-fill: blue; -fx-underline: true;"); // Set the font size, color, and underline
                 visitLabel.setOnMouseClicked(e -> {
                     // When the label is clicked, switch to the patient info view screen
-                    nurseSinglePatientVisitView.switchToNurseSinglePatientVisitView(primaryStage, patientId, visit.get("visit_id"));
+                    nurseSinglePatientVisitView.switchScreen(primaryStage, patientId, visit.get("visit_id"));
                 });
                 visitList.getChildren().add(visitLabel); // Add the label to the layout
             }
@@ -178,7 +178,7 @@ public class nurseSinglePatientView {
         // add a back button to the HBox to return back to the patient list
         Button backButton = new Button("Back");
         backButton.setStyle(setStyleButtonString);
-        backButton.setOnAction(e -> nurseMainView.switchToNurseMainView(primaryStage));
+        backButton.setOnAction(e -> nurseMainView.switchScreen(primaryStage));
 
         layout.getChildren().addAll(mainHBox, backButton); // Add the main hbox to the layout
         return layout;

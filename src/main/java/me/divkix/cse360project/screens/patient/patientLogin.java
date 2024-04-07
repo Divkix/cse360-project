@@ -12,7 +12,7 @@ import static me.divkix.cse360project.Healnet.setStyleButtonString;
 
 public class patientLogin {
     // Method to switch to the patient login screen
-    public static void switchToPatientLoginScreen(Stage primaryStage) {
+    public static void switchScreen(Stage primaryStage) {
         VBox screen = new patientLogin().screen(primaryStage);
         primaryStage.getScene().setRoot(screen);
     }
@@ -48,9 +48,9 @@ public class patientLogin {
             // Check if the patient ID and password are correct
             // If the patient ID and password are correct, switch to the patient view screen
             // If the patient ID and password are incorrect, display an error message
-            boolean correctLogin = checkLoginInfo.checkLogin(patientUniqueIDField.getText(), passwordField.getText());
+            boolean correctLogin = checkLoginInfo.check(patientUniqueIDField.getText(), passwordField.getText());
             if (correctLogin) {
-                patientMainView.switchToPatientMainView(primaryStage, patientUniqueIDField.getText());
+                patientMainView.switchScreen(primaryStage, patientUniqueIDField.getText());
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -65,7 +65,7 @@ public class patientLogin {
         // Add a label, which is clickable, to switch to the patient signup form
         Label patientSignupLabel = new Label("Don't have an account? Sign up here!"); // Create a label
         patientSignupLabel.setStyle("-fx-font-size: 12pt; -fx-underline: true;"); // Set the font size and underline
-        patientSignupLabel.setOnMouseClicked(e -> patientSignup.switchToPatientSignupScreen(primaryStage)); // Switch to patient signup form
+        patientSignupLabel.setOnMouseClicked(e -> patientSignup.switchScreen(primaryStage)); // Switch to patient signup form
 
         // Add a back button to the top left corner
         Button backButton = new Button("Back"); // Create a back button

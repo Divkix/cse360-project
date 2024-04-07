@@ -77,7 +77,7 @@ public class Healnet extends Application {
         }});
 
         // Add new patient
-        sqlHelpers.insertData(userDetailsTable, new HashMap<>() {{
+        sqlHelpers.insertDataIntoTable(userDetailsTable, new HashMap<>() {{
             put("username", "doe_98765");
             put("role", "patient");
             put("first_name", "John");
@@ -91,7 +91,7 @@ public class Healnet extends Application {
             put("password", "password123");
         }});
         // Add some health records for the patient
-        sqlHelpers.insertData(patientDetailsTable, new HashMap<>() {{
+        sqlHelpers.insertDataIntoTable(patientDetailsTable, new HashMap<>() {{
             put("username", "doe_98765");
             put("height", "6'0\"");
             put("weight", "180 lbs");
@@ -102,7 +102,7 @@ public class Healnet extends Application {
             put("gender", "Male");
         }});
         // Add new visit for the patient
-        sqlHelpers.insertData(patientVisitsTable, new HashMap<>() {{
+        sqlHelpers.insertDataIntoTable(patientVisitsTable, new HashMap<>() {{
             put("username", "doe_98765");
             put("doctor_username", "jane_12345");
             put("visit_date", "01/01/2021");
@@ -111,7 +111,7 @@ public class Healnet extends Application {
             put("prescription", "None");
         }});
         // Add upcoming visit for the patient
-        sqlHelpers.insertData(patientVisitsTable, new HashMap<>() {{
+        sqlHelpers.insertDataIntoTable(patientVisitsTable, new HashMap<>() {{
             put("username", "doe_98765");
             put("doctor_username", "jane_12345");
             put("visit_date", "05/05/2024");
@@ -119,7 +119,7 @@ public class Healnet extends Application {
         }});
 
         // Add new doctor
-        sqlHelpers.insertData(userDetailsTable, new HashMap<>() {{
+        sqlHelpers.insertDataIntoTable(userDetailsTable, new HashMap<>() {{
             put("username", "jane_12345");
             put("first_name", "Jane");
             put("last_name", "Smith");
@@ -127,7 +127,7 @@ public class Healnet extends Application {
             put("password", "password123");
         }});
         // Add a new nurse
-        sqlHelpers.insertData(userDetailsTable, new HashMap<>() {{
+        sqlHelpers.insertDataIntoTable(userDetailsTable, new HashMap<>() {{
             put("username", "janice_12345");
             put("first_name", "Janice");
             put("last_name", "Johnson");
@@ -165,13 +165,13 @@ public class Healnet extends Application {
         Button patientLoginButton = new Button("Patient Login"); // Create a button
         patientLoginButton.setStyle(setStyleButtonString); // Set the font size and background color
         patientLoginButton.setPrefWidth(250); // Set the button width
-        patientLoginButton.setOnAction(e -> patientLogin.switchToPatientLoginScreen(primaryStage)); // Switch to patient login form
+        patientLoginButton.setOnAction(e -> patientLogin.switchScreen(primaryStage)); // Switch to patient login form
 
         // Employee Login button
         Button employeeLoginButton = new Button("Employee Login"); // Create a button
         employeeLoginButton.setStyle(setStyleButtonString); // Set the font size
         employeeLoginButton.setPrefWidth(250); // Set the button width
-        employeeLoginButton.setOnAction(e -> employeeLogin.switchToEmployeeLoginScreen(primaryStage)); // Switch to patient view
+        employeeLoginButton.setOnAction(e -> employeeLogin.switchScreen(primaryStage)); // Switch to patient view
 
         // Add the components to the layout
         layout.getChildren().addAll(titleLabel, patientLoginButton, employeeLoginButton);

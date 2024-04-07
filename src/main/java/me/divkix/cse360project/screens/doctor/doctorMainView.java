@@ -13,7 +13,7 @@ import static me.divkix.cse360project.Healnet.layoutStyleString;
 import static me.divkix.cse360project.Healnet.userDetailsTable;
 
 public class doctorMainView {
-    public static void switchToDoctorMainView(Stage primaryStage) {
+    public static void switchScreen(Stage primaryStage) {
         VBox screen = new doctorMainView().screen(primaryStage);
         primaryStage.getScene().setRoot(screen);
     }
@@ -26,10 +26,10 @@ public class doctorMainView {
         // get the list of patients from the database where role is patient
         // display the list of patients in a vbox with clickable labels
         // when a label is clicked, switch to the patient info view screen
-        List<Map<String, String>> patients = sqlHelpers.getMultipleData(userDetailsTable, "role", "patient");
+        List<Map<String, String>> patients = sqlHelpers.getMultipleDataFromTable(userDetailsTable, "role", "patient");
 
         // create a label called "Welcome Doctor <nurse name>"
-        Map<String, String> nurseDetails = sqlHelpers.getMultipleData(userDetailsTable, "role", "nurse").getFirst();
+        Map<String, String> nurseDetails = sqlHelpers.getMultipleDataFromTable(userDetailsTable, "role", "nurse").getFirst();
         Label welcomeLabel = new Label("Welcome Doctor " + nurseDetails.get("first_name")); // Create a label
         welcomeLabel.setStyle("-fx-font-size: 16pt;"); // Set the font size
         layout.getChildren().add(welcomeLabel); // Add the label to the layout

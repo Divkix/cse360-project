@@ -14,7 +14,7 @@ import static me.divkix.cse360project.Healnet.userDetailsTable;
 
 public class patientSignup {
     // Method to switch to the patient signup screen
-    public static void switchToPatientSignupScreen(Stage primaryStage) {
+    public static void switchScreen(Stage primaryStage) {
         GridPane screen = new patientSignup().screen(primaryStage);
         primaryStage.getScene().setRoot(screen);
     }
@@ -109,7 +109,7 @@ public class patientSignup {
         // Add Event Handler for savePatientInfoButton to handle the save info logic
         savePatientInfoButton.setOnAction(e -> {
             String patientId = patientLastNameField.getText() + "_" + phoneField.getText();
-            sqlHelpers.insertData(userDetailsTable,
+            sqlHelpers.insertDataIntoTable(userDetailsTable,
                     new HashMap<>() {{
                         put("username", patientId);
                         put("first_name", patientFirstNameField.getText());

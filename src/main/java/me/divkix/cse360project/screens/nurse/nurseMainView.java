@@ -14,7 +14,7 @@ import static me.divkix.cse360project.Healnet.userDetailsTable;
 
 public class nurseMainView {
     // Method to switch to the patient signup screen
-    public static void switchToNurseMainView(Stage primaryStage) {
+    public static void switchScreen(Stage primaryStage) {
         VBox screen = new nurseMainView().screen(primaryStage);
         primaryStage.getScene().setRoot(screen);
     }
@@ -27,10 +27,10 @@ public class nurseMainView {
         // get the list of patients from the database where role is patient
         // display the list of patients in a vbox with clickable labels
         // when a label is clicked, switch to the patient info view screen
-        List<Map<String, String>> patients = sqlHelpers.getMultipleData(userDetailsTable, "role", "patient");
+        List<Map<String, String>> patients = sqlHelpers.getMultipleDataFromTable(userDetailsTable, "role", "patient");
 
         // create a label called "Welcome Nurse <nurse name>"
-        Map<String, String> nurseDetails = sqlHelpers.getMultipleData(userDetailsTable, "role", "nurse").getFirst();
+        Map<String, String> nurseDetails = sqlHelpers.getMultipleDataFromTable(userDetailsTable, "role", "nurse").getFirst();
         Label welcomeLabel = new Label("Welcome Nurse " + nurseDetails.get("first_name")); // Create a label
         welcomeLabel.setStyle("-fx-font-size: 16pt;"); // Set the font size
         layout.getChildren().add(welcomeLabel); // Add the label to the layout
@@ -55,7 +55,7 @@ public class nurseMainView {
             // when the label is clicked, switch to the patient info view screen as viewed by nurse
             patientLabel.setOnMouseClicked(e -> {
                 // When the label is clicked, switch to the patient info view screen
-                nurseSinglePatientView.switchToNurseSinglePatientView(primaryStage, patient.get("username"));
+                nurseSinglePatientView.switchScreen(primaryStage, patient.get("username"));
             });
             patientList.getChildren().add(patientLabel); // Add the label to the layout
         }

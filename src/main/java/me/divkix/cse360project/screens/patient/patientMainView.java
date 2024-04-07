@@ -15,7 +15,7 @@ import static me.divkix.cse360project.Healnet.*;
 
 public class patientMainView {
     // Method to switch to the patient signup screen
-    public static void switchToPatientMainView(Stage primaryStage, String username) {
+    public static void switchScreen(Stage primaryStage, String username) {
         VBox screen = new patientMainView().screen(primaryStage, username);
         primaryStage.getScene().setRoot(screen);
     }
@@ -27,9 +27,9 @@ public class patientMainView {
         layout.setAlignment(Pos.CENTER); // Center the components
 
         // get all user visits
-        List<Map<String, String>> userVisits = sqlHelpers.getMultipleData(patientVisitsTable, "username", username);
+        List<Map<String, String>> userVisits = sqlHelpers.getMultipleDataFromTable(patientVisitsTable, "username", username);
         // get all user details
-        Map<String, String> userDetails = sqlHelpers.getDataUsingUsername(userDetailsTable, username);
+        Map<String, String> userDetails = sqlHelpers.getDataUsingUsernameFromTable(userDetailsTable, username);
 
         // Create a title label
         Label titleLabel = new Label("Welcome, " + userDetails.get("first_name") + " " + userDetails.get("last_name"));
@@ -73,7 +73,7 @@ public class patientMainView {
         for (Map<String, String> visit : visits) {
             Label visitLabel = new Label("• " + visit.get("visit_date") + " - " + visit.get("visit_reason"));
             visitLabel.setStyle("-fx-font-size: 14pt; -fx-text-fill: blue; -fx-underline: true;");
-            visitLabel.setOnMouseClicked(e -> patientVisitView.switchToPatientVisitView(primaryStage, visit.get("username"), visit.get("visit_id")));
+            visitLabel.setOnMouseClicked(e -> patientVisitView.switchScreen(primaryStage, visit.get("username"), visit.get("visit_id")));
             vBox.getChildren().add(visitLabel);
         }
     }

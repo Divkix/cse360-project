@@ -16,7 +16,7 @@ import static me.divkix.cse360project.Healnet.*;
 
 public class employeeLogin {
     // Method to switch to the employee login screen
-    public static void switchToEmployeeLoginScreen(Stage primaryStage) {
+    public static void switchScreen(Stage primaryStage) {
         VBox screen = new employeeLogin().screen(primaryStage);
         primaryStage.getScene().setRoot(screen);
     }
@@ -52,16 +52,16 @@ public class employeeLogin {
             // Check if the patient ID and password are correct
             // If the patient ID and password are correct, switch to the patient view screen
             // If the patient ID and password are incorrect, display an error message
-            boolean correctLogin = checkLoginInfo.checkLogin(employeeUniqueIDField.getText(), passwordField.getText());
+            boolean correctLogin = checkLoginInfo.check(employeeUniqueIDField.getText(), passwordField.getText());
             if (correctLogin) {
                 // get the type of role from database
-                Map<String, String> role = sqlHelpers.getDataUsingUsername(userDetailsTable, employeeUniqueIDField.getText());
+                Map<String, String> role = sqlHelpers.getDataUsingUsernameFromTable(userDetailsTable, employeeUniqueIDField.getText());
                 // if the role is doctor, switch to doctor main view
                 if (role.get("role").equals("doctor")) {
-                    doctorMainView.switchToDoctorMainView(primaryStage);
+                    doctorMainView.switchScreen(primaryStage);
                 }
                 // if the role is nurse, switch to nurse main view, which is the default employee view
-                nurseMainView.switchToNurseMainView(primaryStage);
+                nurseMainView.switchScreen(primaryStage);
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");

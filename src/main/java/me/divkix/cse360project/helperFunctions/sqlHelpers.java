@@ -54,7 +54,7 @@ public class sqlHelpers {
     }
 
     // Method to insert data into a table
-    public static void insertData(String tableName, Map<String, String> data) {
+    public static void insertDataIntoTable(String tableName, Map<String, String> data) {
         // get the primary key
         String primaryKey = data.get("username");
 
@@ -123,7 +123,7 @@ public class sqlHelpers {
         }
     }
 
-    public static Map<String, String> getDataUsingUsername(String tableName, String username) {
+    public static Map<String, String> getDataUsingUsernameFromTable(String tableName, String username) {
         Map<String, String> data = new HashMap<>();
 
         // Try to connect to the database and get the data
@@ -161,7 +161,7 @@ public class sqlHelpers {
     }
 
     // similar function like getDataUsingUsername but returns a list of maps
-    public static List<Map<String, String>> getMultipleData(String tableName, String columnName, String columnValue) {
+    public static List<Map<String, String>> getMultipleDataFromTable(String tableName, String columnName, String columnValue) {
         List<Map<String, String>> dataList = new ArrayList<>();
 
         // Try to connect to the database and get the data
@@ -201,7 +201,7 @@ public class sqlHelpers {
     }
 
     // create a updateData function that takes in the table name, the primary key, and a map of the new data
-    public static void updateData(String tableName, String primaryKey, Map<String, String> newData) {
+    public static void updateDataIntoTable(String tableName, String primaryKey, Map<String, String> newData) {
         // Build the SQL statement dynamically
         StringBuilder sql = new StringBuilder("UPDATE " + tableName + " SET ");
 
