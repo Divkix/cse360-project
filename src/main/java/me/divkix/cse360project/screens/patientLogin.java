@@ -13,6 +13,12 @@ import static me.divkix.cse360project.Healnet.layoutStyleString;
 import static me.divkix.cse360project.Healnet.setStyleButtonString;
 
 public class patientLogin {
+    // Method to switch to the patient login screen
+    public static void switchToPatientLoginScreen(Stage primaryStage) {
+        VBox patientLoginScreen = new patientLogin().patientLoginScreen(primaryStage);
+        primaryStage.getScene().setRoot(patientLoginScreen);
+    }
+
     public VBox patientLoginScreen(Stage primaryStage) {
         // create a vbox layout with 10 hgap and vgap and 1 text field, 1 password field, 1 button
         VBox patientLoginLayout = new VBox(35); // Create a layout with vertical spacing of 10
@@ -42,6 +48,11 @@ public class patientLogin {
         // TODO: Add action to switch to patient login form
 //        patientLoginButton.setOnAction(e -> switchToPatientLoginScreen(primaryStage)); // Switch to patient login form
 
+        // Add a label, which is clickable, to switch to the patient signup form
+        Label patientSignupLabel = new Label("Don't have an account? Sign up here!"); // Create a label
+        patientSignupLabel.setStyle("-fx-font-size: 12pt; -fx-underline: true;"); // Set the font size and underline
+        patientSignupLabel.setOnMouseClicked(e -> patientSignup.switchToPatientSignupScreen(primaryStage)); // Switch to patient signup form
+
         // Add a back button to the top left corner
         Button backButton = new Button("Back"); // Create a back button
         backButton.setOnAction(e ->
@@ -55,13 +66,9 @@ public class patientLogin {
         backButton.setStyle(setStyleButtonString); // Set the font size
 
         // Add the components to the layout
-        patientLoginLayout.getChildren().addAll(titleLabel, patientIDLabel, patientUniqueIDField, passwordLabel, passwordField, patientLoginButton, backButton);
+        patientLoginLayout.getChildren().addAll(titleLabel, patientIDLabel, patientUniqueIDField, passwordLabel, passwordField, patientLoginButton, patientSignupLabel, backButton);
 
+        // Return the layout
         return patientLoginLayout;
-    }
-
-    public static void switchToPatientLoginScreen(Stage primaryStage) {
-        VBox patientLoginScreen = new patientLogin().patientLoginScreen(primaryStage);
-        primaryStage.getScene().setRoot(patientLoginScreen);
     }
 }

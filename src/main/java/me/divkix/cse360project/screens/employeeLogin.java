@@ -60,6 +60,7 @@ public class employeeLogin {
         return employeeLoginLayout;
     }
 
+    // Method to switch to the employee login screen
     public static void switchToEmployeeLoginScreen(Stage primaryStage) {
         VBox employeeLoginScreen = new employeeLogin().employeeLoginScreen(primaryStage);
         primaryStage.getScene().setRoot(employeeLoginScreen);
