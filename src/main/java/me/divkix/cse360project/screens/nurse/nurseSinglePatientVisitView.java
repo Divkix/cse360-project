@@ -15,12 +15,12 @@ import java.util.Map;
 import static me.divkix.cse360project.Healnet.*;
 
 public class nurseSinglePatientVisitView {
-    public static void switchToNurseSinglePatientVisitView(Stage primaryStage, String patientId, String date) {
-        VBox screen = new nurseSinglePatientVisitView().screen(primaryStage, patientId, date);
+    public static void switchToNurseSinglePatientVisitView(Stage primaryStage, String patientId, String visitId) {
+        VBox screen = new nurseSinglePatientVisitView().screen(primaryStage, patientId, visitId);
         primaryStage.getScene().setRoot(screen);
     }
 
-    public VBox screen(Stage primaryStage, String patientId, String date) {
+    private VBox screen(Stage primaryStage, String patientId, String visitId) {
         VBox layout = new VBox(); // Create a layout with vertical spacing of 15
         layout.setAlignment(Pos.CENTER); // Center the components
         layout.setStyle("-fx-padding: 20; -fx-alignment: center;"); // Add padding and center the components
@@ -35,7 +35,7 @@ public class nurseSinglePatientVisitView {
 
         // iterate throught the list of visit details and set it to the single visit details
         for (Map<String, String> visit : visitDetails) {
-            if (visit.get("visit_date").equals(date)) {
+            if (visit.get("visit_id").equals(visitId)) {
                 singleVisitDetails = visit;
             }
         }

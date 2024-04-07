@@ -37,7 +37,7 @@ public class Healnet extends Application {
     // Method to initialize the database
     // This method will create a new database and a new table for user details
     // It will also add a new patient, doctor, and nurse to the user details table
-    public static void initializeDatabase() {
+    private static void initializeDatabase() {
         // Create a new database
         sqlHelpers.createNewDatabase();
         // Create a new table for user details

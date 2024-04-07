@@ -21,7 +21,7 @@ public class nurseSinglePatientView {
         primaryStage.getScene().setRoot(screen);
     }
 
-    public VBox screen(Stage primaryStage, String patientId) {
+    private VBox screen(Stage primaryStage, String patientId) {
         VBox layout = new VBox();
         layout.setAlignment(Pos.CENTER); // Center the components
         layout.setStyle(layoutStyleString); // Add padding and center the components
@@ -160,7 +160,7 @@ public class nurseSinglePatientView {
                 visitLabel.setStyle("-fx-font-size: 14pt; -fx-text-fill: blue; -fx-underline: true;"); // Set the font size, color, and underline
                 visitLabel.setOnMouseClicked(e -> {
                     // When the label is clicked, switch to the patient info view screen
-                    nurseSinglePatientVisitView.switchToNurseSinglePatientVisitView(primaryStage, patientId, visit.get("visit_date"));
+                    nurseSinglePatientVisitView.switchToNurseSinglePatientVisitView(primaryStage, patientId, visit.get("visit_id"));
                 });
                 visitList.getChildren().add(visitLabel); // Add the label to the layout
             }

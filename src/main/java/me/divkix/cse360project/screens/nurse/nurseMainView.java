@@ -19,7 +19,7 @@ public class nurseMainView {
         primaryStage.getScene().setRoot(screen);
     }
 
-    public VBox screen(Stage primaryStage) {
+    private VBox screen(Stage primaryStage) {
         VBox layout = new VBox(15); // Create a layout with vertical spacing of 15
         layout.setAlignment(Pos.TOP_CENTER); // Center the components
         layout.setStyle(layoutStyleString); // Add padding and center the components

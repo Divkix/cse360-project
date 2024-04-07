@@ -21,7 +21,7 @@ public class employeeLogin {
         primaryStage.getScene().setRoot(screen);
     }
 
-    public VBox screen(Stage primaryStage) {
+    private VBox screen(Stage primaryStage) {
         // create a vbox layout with 10 hgap and vgap and 1 text field, 1 password field, 1 button
         VBox layout = new VBox(35); // Create a layout with vertical spacing of 10
         layout.setAlignment(Pos.CENTER); // Center the components

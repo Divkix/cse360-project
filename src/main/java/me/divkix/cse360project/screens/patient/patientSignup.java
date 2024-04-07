@@ -19,7 +19,7 @@ public class patientSignup {
         primaryStage.getScene().setRoot(screen);
     }
 
-    public GridPane screen(Stage primaryStage) {
+    private GridPane screen(Stage primaryStage) {
         GridPane layout = new GridPane(); // Create a GridPane layout
         layout.setHgap(10); // Set horizontal gap
         layout.setVgap(10); // Set vertical gap
