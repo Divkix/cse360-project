@@ -81,12 +81,19 @@ public class nurseSinglePatientView {
             if (!entry.getKey().equals("username") && !entry.getKey().equals("password") && !entry.getKey().equals("role")) {
                 Label label = new Label(replaceKeys.getOrDefault(entry.getKey(), entry.getKey()));
                 label.setStyle("-fx-font-size: 14pt;");
-                TextField value = new TextField(entry.getValue());
-                patientDetails.add(label, 0, patientDetails.getRowCount());
-                patientDetails.add(value, 1, patientDetails.getRowCount() - 1);
 
-                // Store the TextField in the map
-                textFieldMap.put(entry.getKey(), value);
+                if (entry.getKey().equals("gender")) {
+                    Label valueLabel = new Label(entry.getValue());
+                    patientDetails.add(label, 0, patientDetails.getRowCount());
+                    patientDetails.add(valueLabel, 1, patientDetails.getRowCount() - 1);
+                } else {
+                    TextField value = new TextField(entry.getValue());
+                    patientDetails.add(label, 0, patientDetails.getRowCount());
+                    patientDetails.add(value, 1, patientDetails.getRowCount() - 1);
+
+                    // Store the TextField in the map
+                    textFieldMap.put(entry.getKey(), value);
+                }
             }
         }
 
