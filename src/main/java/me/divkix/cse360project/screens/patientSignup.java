@@ -1,10 +1,7 @@
 package me.divkix.cse360project.screens;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import me.divkix.cse360project.Healnet;
@@ -126,6 +123,27 @@ public class patientSignup {
                         put("role", "patient");
                         put("password", "password123");
                     }});
+            // make a popup box saying "User Registration Successful" with button to go back to login screen
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("User Registration Successful");
+
+            ButtonType loginButtonType = new ButtonType("Go to Login", ButtonBar.ButtonData.OK_DONE);
+            alert.getButtonTypes().setAll(loginButtonType);
+
+            Button loginButton = (Button) alert.getDialogPane().lookupButton(loginButtonType);
+            loginButton.setOnAction(
+                    e1 -> {
+                        try {
+                            new Healnet().start(primaryStage); // Switch to the initial view
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
+                    }
+            );
+
+            alert.showAndWait();
         });
 
         // Add a back button to the top left corner
