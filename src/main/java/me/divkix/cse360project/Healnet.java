@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import me.divkix.cse360project.helperFunctions.sqlHelper;
 import me.divkix.cse360project.screens.employeeLogin;
-import me.divkix.cse360project.screens.patientLogin;
+import me.divkix.cse360project.screens.patient.patientLogin;
 
 import java.util.HashMap;
 

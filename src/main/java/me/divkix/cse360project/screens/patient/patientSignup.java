@@ -1,4 +1,4 @@
-package me.divkix.cse360project.screens;
+package me.divkix.cse360project.screens.patient;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -15,8 +15,8 @@ import static me.divkix.cse360project.Healnet.userDetailsTable;
 public class patientSignup {
     // Method to switch to the patient signup screen
     public static void switchToPatientSignupScreen(Stage primaryStage) {
-        GridPane patientSignupScreen = new patientSignup().patientSignupScreen(primaryStage);
-        primaryStage.getScene().setRoot(patientSignupScreen);
+        GridPane screen = new patientSignup().patientSignupScreen(primaryStage);
+        primaryStage.getScene().setRoot(screen);
     }
 
     public GridPane patientSignupScreen(Stage primaryStage) {

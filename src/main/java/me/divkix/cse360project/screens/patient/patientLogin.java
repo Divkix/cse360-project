@@ -1,13 +1,11 @@
-package me.divkix.cse360project.screens;
+package me.divkix.cse360project.screens.patient;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import me.divkix.cse360project.Healnet;
+import me.divkix.cse360project.helperFunctions.checkLoginInfo;
 
 import static me.divkix.cse360project.Healnet.layoutStyleString;
 import static me.divkix.cse360project.Healnet.setStyleButtonString;
@@ -15,8 +13,8 @@ import static me.divkix.cse360project.Healnet.setStyleButtonString;
 public class patientLogin {
     // Method to switch to the patient login screen
     public static void switchToPatientLoginScreen(Stage primaryStage) {
-        VBox patientLoginScreen = new patientLogin().patientLoginScreen(primaryStage);
-        primaryStage.getScene().setRoot(patientLoginScreen);
+        VBox screen = new patientLogin().patientLoginScreen(primaryStage);
+        primaryStage.getScene().setRoot(screen);
     }
 
     public VBox patientLoginScreen(Stage primaryStage) {
@@ -46,7 +44,23 @@ public class patientLogin {
         patientLoginButton.setStyle(setStyleButtonString); // Set the font size and background color
         patientLoginButton.setPrefWidth(250); // Set the button width
         // TODO: Add action to switch to patient login form
-//        patientLoginButton.setOnAction(e -> switchToPatientLoginScreen(primaryStage)); // Switch to patient login form
+        patientLoginButton.setOnAction(e -> {
+            // Check if the patient ID and password are correct
+            // If the patient ID and password are correct, switch to the patient view screen
+            // If the patient ID and password are incorrect, display an error message
+            boolean correctLogin = checkLoginInfo.checkLogin(patientUniqueIDField.getText(), passwordField.getText());
+            if (correctLogin) {
+                patientMainView.switchToPatientMainView(primaryStage);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid Login");
+                alert.setContentText("The patient ID or password is incorrect. Please try again.");
+                alert.showAndWait();
+                ButtonType buttonTypeCancel = new ButtonType("Close", ButtonBar.ButtonData.CANCEL_CLOSE);
+                alert.getButtonTypes().setAll(buttonTypeCancel);
+            }
+        });
 
         // Add a label, which is clickable, to switch to the patient signup form
         Label patientSignupLabel = new Label("Don't have an account? Sign up here!"); // Create a label
