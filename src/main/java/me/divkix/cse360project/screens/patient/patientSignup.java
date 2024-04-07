@@ -9,10 +9,7 @@ import me.divkix.cse360project.helperFunctions.sqlHelpers;
 
 import java.util.HashMap;
 
-import static me.divkix.cse360project.Healnet.setStyleButtonString;
-import static me.divkix.cse360project.Healnet.userDetailsTable;
-
-public class patientSignup {
+public class patientSignup extends Healnet {
     // Method to switch to the patient signup screen
     public static void switchScreen(Stage primaryStage) {
         GridPane screen = new patientSignup().screen(primaryStage);

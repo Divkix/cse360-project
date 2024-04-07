@@ -6,15 +6,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import me.divkix.cse360project.Healnet;
 import me.divkix.cse360project.helperFunctions.sqlHelpers;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static me.divkix.cse360project.Healnet.*;
 
-public class nurseSinglePatientView {
+public class nurseSinglePatientView extends Healnet {
     // Method to switch to the patient signup screen
     public static void switchScreen(Stage primaryStage, String patientId) {
         VBox screen = new nurseSinglePatientView().screen(primaryStage, patientId);

@@ -4,15 +4,13 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import me.divkix.cse360project.Healnet;
 import me.divkix.cse360project.helperFunctions.sqlHelpers;
 
 import java.util.List;
 import java.util.Map;
 
-import static me.divkix.cse360project.Healnet.layoutStyleString;
-import static me.divkix.cse360project.Healnet.userDetailsTable;
-
-public class doctorMainView {
+public class doctorMainView extends Healnet {
     public static void switchScreen(Stage primaryStage) {
         VBox screen = new doctorMainView().screen(primaryStage);
         primaryStage.getScene().setRoot(screen);

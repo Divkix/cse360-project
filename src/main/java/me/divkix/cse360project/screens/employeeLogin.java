@@ -12,9 +12,7 @@ import me.divkix.cse360project.screens.nurse.nurseMainView;
 
 import java.util.Map;
 
-import static me.divkix.cse360project.Healnet.*;
-
-public class employeeLogin {
+public class employeeLogin extends Healnet {
     // Method to switch to the employee login screen
     public static void switchScreen(Stage primaryStage) {
         VBox screen = new employeeLogin().screen(primaryStage);

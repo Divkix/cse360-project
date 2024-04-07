@@ -7,10 +7,7 @@ import javafx.stage.Stage;
 import me.divkix.cse360project.Healnet;
 import me.divkix.cse360project.helperFunctions.checkLoginInfo;
 
-import static me.divkix.cse360project.Healnet.layoutStyleString;
-import static me.divkix.cse360project.Healnet.setStyleButtonString;
-
-public class patientLogin {
+public class patientLogin extends Healnet {
     // Method to switch to the patient login screen
     public static void switchScreen(Stage primaryStage) {
         VBox screen = new patientLogin().screen(primaryStage);
