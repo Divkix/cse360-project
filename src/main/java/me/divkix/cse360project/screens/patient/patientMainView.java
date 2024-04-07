@@ -100,8 +100,7 @@ public class patientMainView extends Healnet {
         }
 
         // Sort the previous visits in descending order and the upcoming visits in ascending order
-        previousVisits.sort((visit1, visit2) -> LocalDate.parse(visit2.get("visit_date"), formatter)
-                .compareTo(LocalDate.parse(visit1.get("visit_date"), formatter)));
+        previousVisits.sort((visit1, visit2) -> LocalDate.parse(visit2.get("visit_date"), formatter).compareTo(LocalDate.parse(visit1.get("visit_date"), formatter)));
 
         // Sort the upcoming visits in ascending order
         upcomingVisits.sort(Comparator.comparing(visit -> LocalDate.parse(visit.get("visit_date"), formatter)));

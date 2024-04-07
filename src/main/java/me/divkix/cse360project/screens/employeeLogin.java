@@ -73,8 +73,7 @@ public class employeeLogin extends Healnet {
 
         // Add a back button to the top left corner
         Button backButton = new Button("Back"); // Create a back button
-        backButton.setOnAction(e ->
-        {
+        backButton.setOnAction(e -> {
             try {
                 new Healnet().start(primaryStage); // Switch to the initial view
             } catch (Exception exception) {

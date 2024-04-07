@@ -59,8 +59,7 @@ public class sqlHelpers {
         String primaryKey = data.get("username");
 
         // Check if primary key already exists
-        try (Connection conn = DriverManager.getConnection(connectionString);
-             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM " + tableName + " WHERE username = ?")) {
+        try (Connection conn = DriverManager.getConnection(connectionString); PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM " + tableName + " WHERE username = ?")) {
 
             // Set the primary key value
             pstmt.setString(1, data.get(primaryKey));

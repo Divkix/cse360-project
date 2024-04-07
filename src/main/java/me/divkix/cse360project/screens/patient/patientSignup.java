@@ -106,20 +106,19 @@ public class patientSignup extends Healnet {
         // Add Event Handler for savePatientInfoButton to handle the save info logic
         savePatientInfoButton.setOnAction(e -> {
             String patientId = patientLastNameField.getText() + "_" + phoneField.getText();
-            sqlHelpers.insertDataIntoTable(userDetailsTable,
-                    new HashMap<>() {{
-                        put("username", patientId);
-                        put("first_name", patientFirstNameField.getText());
-                        put("last_name", patientLastNameField.getText());
-                        put("email", emailField.getText());
-                        put("phone", phoneField.getText());
-                        put("date_of_birth", dobField.getText());
-                        put("address", addressField.getText());
-                        put("insurance_provider", insuranceProviderField.getText());
-                        put("insurance_id", insuranceIDField.getText());
-                        put("role", "patient");
-                        put("password", "password123");
-                    }});
+            sqlHelpers.insertDataIntoTable(userDetailsTable, new HashMap<>() {{
+                put("username", patientId);
+                put("first_name", patientFirstNameField.getText());
+                put("last_name", patientLastNameField.getText());
+                put("email", emailField.getText());
+                put("phone", phoneField.getText());
+                put("date_of_birth", dobField.getText());
+                put("address", addressField.getText());
+                put("insurance_provider", insuranceProviderField.getText());
+                put("insurance_id", insuranceIDField.getText());
+                put("role", "patient");
+                put("password", "password123");
+            }});
             // make a popup box saying "User Registration Successful" with button to go back to login screen
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
@@ -130,15 +129,13 @@ public class patientSignup extends Healnet {
             alert.getButtonTypes().setAll(loginButtonType);
 
             Button loginButton = (Button) alert.getDialogPane().lookupButton(loginButtonType);
-            loginButton.setOnAction(
-                    e1 -> {
-                        try {
-                            new Healnet().start(primaryStage); // Switch to the initial view
-                        } catch (Exception exception) {
-                            exception.printStackTrace();
-                        }
-                    }
-            );
+            loginButton.setOnAction(e1 -> {
+                try {
+                    new Healnet().start(primaryStage); // Switch to the initial view
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            });
 
             alert.showAndWait();
         });
