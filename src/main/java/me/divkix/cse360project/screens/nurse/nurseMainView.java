@@ -21,13 +21,19 @@ public class nurseMainView {
 
     public VBox screen(Stage primaryStage) {
         VBox layout = new VBox(15); // Create a layout with vertical spacing of 15
-        layout.setAlignment(Pos.CENTER); // Center the components
+        layout.setAlignment(Pos.TOP_CENTER); // Center the components
         layout.setStyle(layoutStyleString); // Add padding and center the components
 
         // get the list of patients from the database where role is patient
         // display the list of patients in a vbox with clickable labels
         // when a label is clicked, switch to the patient info view screen
         List<Map<String, String>> patients = sqlHelpers.getMultipleData(userDetailsTable, "role", "patient");
+
+        // create a label called "Welcome Nurse <nurse name>"
+        Map<String, String> nurseDetails = sqlHelpers.getMultipleData(userDetailsTable, "role", "nurse").getFirst();
+        Label welcomeLabel = new Label("Welcome Nurse " + nurseDetails.get("first_name")); // Create a label
+        welcomeLabel.setStyle("-fx-font-size: 16pt;"); // Set the font size
+        layout.getChildren().add(welcomeLabel); // Add the label to the layout
 
         // create a label called "Patient List"
         Label titleLabel = new Label("Patient List"); // Create a label

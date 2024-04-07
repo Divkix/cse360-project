@@ -12,8 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static me.divkix.cse360project.Healnet.patientVisitsTable;
-import static me.divkix.cse360project.Healnet.setStyleButtonString;
+import static me.divkix.cse360project.Healnet.*;
 
 public class nurseSinglePatientVisitView {
     public static void switchToNurseSinglePatientVisitView(Stage primaryStage, String patientId, String date) {
@@ -28,28 +27,29 @@ public class nurseSinglePatientVisitView {
         layout.setSpacing(15); // Set the spacing between the components
 
         // get the visit details from the database
-        List<Map<String, String>> vsitiDetails = sqlHelpers.getMultipleData(patientVisitsTable, "username", patientId);
+        List<Map<String, String>> visitDetails = sqlHelpers.getMultipleData(patientVisitsTable, "username", patientId);
+        Map<String, String> pateintInfo = sqlHelpers.getDataUsingUsername(userDetailsTable, patientId);
 
         // Single Visit Details
         Map<String, String> singleVisitDetails = new HashMap<>();
 
         // iterate throught the list of visit details and set it to the single visit details
-        for (Map<String, String> visit : vsitiDetails) {
+        for (Map<String, String> visit : visitDetails) {
             if (visit.get("visit_date").equals(date)) {
                 singleVisitDetails = visit;
             }
         }
 
         Map<String, String> replaceKeys = new HashMap<>() {{
-            put("visit_id", "Visit ID");
-            put("visit_date", "Visit Date");
-            put("visit_reason", "Visit Reason");
-            put("diagnosis", "Diagnosis");
-            put("prescription", "Prescription");
+            put("visit_id", "Visit ID: ");
+            put("visit_date", "Visit Date: ");
+            put("visit_reason", "Visit Reason: ");
+            put("diagnosis", "Diagnosis: ");
+            put("prescription", "Prescription: ");
         }};
 
         // create a label called "Visit Details"
-        Label titleLabel = new Label("Visit Details"); // Create a label
+        Label titleLabel = new Label("Visit Details for " + pateintInfo.get("first_name")); // Create a label
         // add a blamk space between title and gridpane using a VBox with set length
         VBox blankSpace = new VBox();
         blankSpace.setPrefHeight(20);
@@ -57,10 +57,10 @@ public class nurseSinglePatientVisitView {
 
         // create a gridpane with the visit details
         // add the gridpane to the layout
-        GridPane visitDetails = new GridPane();
-        visitDetails.setHgap(10); // Set the horizontal gap between the components
-        visitDetails.setVgap(10); // Set the vertical gap between the components
-        visitDetails.setAlignment(Pos.CENTER); // Center the components
+        GridPane visitDetailslayout = new GridPane();
+        visitDetailslayout.setHgap(10); // Set the horizontal gap between the components
+        visitDetailslayout.setVgap(10); // Set the vertical gap between the components
+        visitDetailslayout.setAlignment(Pos.CENTER); // Center the components
 
         // for all of the other fields, add a label, label to the gridpane and set the second label to the value from the database
         // also, set the label to the field name and apply inline css to set the font size
@@ -69,8 +69,9 @@ public class nurseSinglePatientVisitView {
                 Label label = new Label(replaceKeys.get(entry.getKey()));
                 label.setStyle("-fx-font-size: 14pt;");
                 Label value = new Label(entry.getValue());
-                visitDetails.add(label, 0, visitDetails.getRowCount());
-                visitDetails.add(value, 1, visitDetails.getRowCount() - 1);
+                value.setStyle("-fx-font-size: 14pt;");
+                visitDetailslayout.add(label, 0, visitDetailslayout.getRowCount());
+                visitDetailslayout.add(value, 1, visitDetailslayout.getRowCount() - 1);
             }
         }
 
@@ -81,7 +82,7 @@ public class nurseSinglePatientVisitView {
             nurseSinglePatientView.switchToNurseSinglePatientView(primaryStage, patientId);
         });
 
-        layout.getChildren().addAll(titleLabel, blankSpace, visitDetails, backButton);
+        layout.getChildren().addAll(titleLabel, blankSpace, visitDetailslayout, backButton);
         return layout;
     }
 }

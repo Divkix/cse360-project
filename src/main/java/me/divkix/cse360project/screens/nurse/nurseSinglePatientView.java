@@ -22,6 +22,15 @@ public class nurseSinglePatientView {
     }
 
     public VBox screen(Stage primaryStage, String patientId) {
+        VBox layout = new VBox();
+        layout.setAlignment(Pos.CENTER); // Center the components
+        layout.setStyle(layoutStyleString); // Add padding and center the components
+
+        // create a label called "Patient Details"
+        Label titleLabel = new Label("Patient Details");
+        titleLabel.setStyle("-fx-font-size: 16pt;"); // Set the font size
+        layout.getChildren().add(titleLabel); // Add the label to the layout
+
         // make a hbox with 2 vboxes
         HBox mainHBox = new HBox();
         mainHBox.setSpacing(10); // set the spacing between the vboxes
@@ -45,6 +54,8 @@ public class nurseSinglePatientView {
         // make a gridpane with the patient details
         // add the gridpane to the left vbox
         GridPane patientDetails = new GridPane();
+        patientDetails.setHgap(10); // Set the horizontal gap between the components
+        patientDetails.setVgap(10); // Set the vertical gap between the components
         // create a label for each field
         // create a textfield for each field
         // add the label and textfield to the gridpane
@@ -84,10 +95,12 @@ public class nurseSinglePatientView {
 
                 if (entry.getKey().equals("gender")) {
                     Label valueLabel = new Label(entry.getValue());
+                    valueLabel.setStyle("-fx-font-size: 14pt;");
                     patientDetails.add(label, 0, patientDetails.getRowCount());
                     patientDetails.add(valueLabel, 1, patientDetails.getRowCount() - 1);
                 } else {
                     TextField value = new TextField(entry.getValue());
+                    value.setStyle("-fx-font-size: 14pt;");
                     patientDetails.add(label, 0, patientDetails.getRowCount());
                     patientDetails.add(value, 1, patientDetails.getRowCount() - 1);
 
@@ -107,21 +120,23 @@ public class nurseSinglePatientView {
                 if (!entry.getKey().equals("username") && !entry.getKey().equals("password") && !entry.getKey().equals("role")) {
                     // Retrieve the TextField from the map
                     TextField value = textFieldMap.get(entry.getKey());
-                    newPatientRecord.put(entry.getKey(), value.getText());
+                    if (value != null) {
+                        newPatientRecord.put(entry.getKey(), value.getText());
+                    }
                 }
             }
+            String alertBoxString = "The fields are already up to date.";
             if (!newPatientRecord.equals(patientRecord)) {
                 sqlHelpers.updateData(patientDetailsTable, patientId, newPatientRecord);
-            } else {
-                // show a message that the fields are already up to date
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
-                alert.setHeaderText(null);
-                alert.setContentText("The fields are already up to date.");
-                alert.showAndWait();
-                ButtonType buttonTypeCancel = new ButtonType("Close", ButtonBar.ButtonData.CANCEL_CLOSE);
-                alert.getButtonTypes().setAll(buttonTypeCancel);
+                alertBoxString = "Patient details have been updated successfully.";
             }
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText(alertBoxString);
+            alert.showAndWait();
+            ButtonType buttonTypeCancel = new ButtonType("Close", ButtonBar.ButtonData.CANCEL_CLOSE);
+            alert.getButtonTypes().setAll(buttonTypeCancel);
         });
         // add the patient details and update button to the left vbox
         leftVBox.getChildren().addAll(patientDetails, updateButton);
@@ -163,13 +178,8 @@ public class nurseSinglePatientView {
         // add a back button to the HBox to return back to the patient list
         Button backButton = new Button("Back");
         backButton.setStyle(setStyleButtonString);
-        backButton.setOnAction(e -> {
-            nurseMainView.switchToNurseMainView(primaryStage);
-        });
+        backButton.setOnAction(e -> nurseMainView.switchToNurseMainView(primaryStage));
 
-        VBox layout = new VBox();
-        layout.setAlignment(Pos.CENTER); // Center the components
-        layout.setStyle(layoutStyleString); // Add padding and center the components
         layout.getChildren().addAll(mainHBox, backButton); // Add the main hbox to the layout
         return layout;
     }
