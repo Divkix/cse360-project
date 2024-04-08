@@ -60,6 +60,7 @@ public class patientMainView extends Healnet {
 
         // logout button
         Button logoutButton = new Button("Logout");
+        logoutButton.setStyle(setStyleButtonString);
         logoutButton.setOnAction(e -> {
             try {
                 new Healnet().start(primaryStage);

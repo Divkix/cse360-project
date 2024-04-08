@@ -63,7 +63,8 @@ public class doctorMainView extends Healnet {
         layout.getChildren().add(patientList);
 
         // logout button
-        Button logoutButton = new javafx.scene.control.Button("Logout");
+        Button logoutButton = new Button("Logout");
+        logoutButton.setStyle(setStyleButtonString);
         logoutButton.setOnAction(e -> {
             try {
                 new Healnet().start(primaryStage);
