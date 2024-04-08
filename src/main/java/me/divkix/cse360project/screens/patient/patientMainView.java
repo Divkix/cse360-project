@@ -58,6 +58,12 @@ public class patientMainView extends Healnet {
         hbox.getChildren().addAll(leftVBox, rightVBox);
         layout.getChildren().add(hbox);
 
+        // update profile button
+        Button updateProfileButton = new Button("Update Profile");
+        updateProfileButton.setStyle(setStyleButtonString);
+        updateProfileButton.setOnAction(e -> patientUpdateProfile.switchScreen(primaryStage, username));
+        layout.getChildren().add(updateProfileButton);
+
         // logout button
         Button logoutButton = new Button("Logout");
         logoutButton.setStyle(setStyleButtonString);
