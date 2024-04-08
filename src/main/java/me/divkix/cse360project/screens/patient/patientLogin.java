@@ -34,13 +34,12 @@ public class patientLogin extends Healnet {
         Label passwordLabel = new Label("Password:"); // Create a label for password
         passwordLabel.setStyle("-fx-font-size: 12pt;");
         PasswordField passwordField = new PasswordField(); // Create a text field for password
-        passwordField.setPrefWidth(250); // Set the width of the text field
+        passwordField.setMaxWidth(300); // Set the width of the text field
 
         // Patient Login button
         Button patientLoginButton = new Button("Login"); // Create a button
         patientLoginButton.setStyle(setStyleButtonString); // Set the font size and background color
-        patientLoginButton.setPrefWidth(250); // Set the button width
-        // TODO: Add action to switch to patient login form
+        patientLoginButton.setMaxWidth(300); // Set the button width
         patientLoginButton.setOnAction(e -> {
             // Check if the patient ID and password are correct
             // If the patient ID and password are correct, switch to the patient view screen

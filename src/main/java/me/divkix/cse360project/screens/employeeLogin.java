@@ -33,19 +33,18 @@ public class employeeLogin extends Healnet {
         Label employeeIDLabel = new Label("Employee ID:"); // Create a label for patient ID
         employeeIDLabel.setStyle("-fx-font-size: 12pt;");
         TextField employeeUniqueIDField = new TextField(); // Create a text field for patient ID
-        employeeUniqueIDField.setPrefWidth(250); // Set the width of the text field
+        employeeUniqueIDField.setMaxWidth(300); // Set the width of the text field
 
         // Password text field
         Label passwordLabel = new Label("Password:"); // Create a label for password
         passwordLabel.setStyle("-fx-font-size: 12pt;");
         PasswordField passwordField = new PasswordField(); // Create a text field for password
-        passwordField.setPrefWidth(250); // Set the width of the text field
+        passwordField.setMaxWidth(300); // Set the width of the text field
 
         // Patient Login button
         Button employeeLoginButton = new Button("Login"); // Create a button
         employeeLoginButton.setStyle(setStyleButtonString); // Set the font size and background color
         employeeLoginButton.setPrefWidth(250); // Set the button width
-        // TODO: Add action to switch to patient login form
         employeeLoginButton.setOnAction(e -> {
             // Check if the patient ID and password are correct
             // If the patient ID and password are correct, switch to the patient view screen

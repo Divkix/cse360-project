@@ -1,6 +1,7 @@
 package me.divkix.cse360project.screens.doctor;
 
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -60,6 +61,17 @@ public class doctorMainView extends Healnet {
 
         // Add the layout to the main layout
         layout.getChildren().add(patientList);
+
+        // logout button
+        Button logoutButton = new javafx.scene.control.Button("Logout");
+        logoutButton.setOnAction(e -> {
+            try {
+                new Healnet().start(primaryStage);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        });
+        layout.getChildren().add(logoutButton);
 
         return layout;
     }
