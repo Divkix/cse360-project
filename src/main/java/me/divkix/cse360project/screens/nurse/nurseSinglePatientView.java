@@ -50,6 +50,7 @@ public class nurseSinglePatientView extends Healnet {
         // get current details of the patient
         Map<String, String> patient = sqlHelpers.getDataUsingUsernameFromTable(userDetailsTable, patientId);
         Map<String, String> patientRecord = sqlHelpers.getDataUsingUsernameFromTable(patientDetailsTable, patientId);
+        patientRecord.put("gender", patient.get("gender"));
 
         // make a gridpane with the patient details
         // add the gridpane to the left vbox

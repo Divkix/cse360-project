@@ -22,6 +22,7 @@ public class initDb {
             put("insurance_id", "text DEFAULT NULL");
             put("role", "text DEFAULT 'patient' NOT NULL");
             put("password", "text NOT NULL");
+            put("gender", "text DEFAULT NULL");
         }});
         // create a new table for patient details
         sqlHelpers.createNewTable(patientDetailsTable, new java.util.HashMap<>() {{
@@ -32,7 +33,6 @@ public class initDb {
             put("allergies", "text DEFAULT NULL");
             put("medications", "text DEFAULT NULL");
             put("medical_conditions", "text DEFAULT NULL");
-            put("gender", "text DEFAULT NULL");
         }});
         // create a table for patient visits
         sqlHelpers.createNewTable(patientVisitsTable, new java.util.HashMap<>() {{
@@ -58,6 +58,7 @@ public class initDb {
             put("insurance_provider", "Blue Cross Blue Shield");
             put("insurance_id", "123456789");
             put("password", "password123");
+            put("gender", "Male");
         }});
         // Add some health records for the patient
         sqlHelpers.insertDataIntoTable(patientDetailsTable, new java.util.HashMap<>() {{
@@ -68,7 +69,6 @@ public class initDb {
             put("allergies", "Peanuts");
             put("medications", "Aspirin");
             put("medical_conditions", "Asthma");
-            put("gender", "Male");
         }});
         // Add new visit for the patient
         sqlHelpers.insertDataIntoTable(patientVisitsTable, new java.util.HashMap<>() {{
