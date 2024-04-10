@@ -53,12 +53,14 @@ public class employeeLogin extends Healnet {
             if (correctLogin) {
                 // get the type of role from database
                 Map<String, String> role = sqlHelpers.getDataUsingUsernameFromTable(userDetailsTable, employeeUniqueIDField.getText());
+                System.out.println(role);
                 // if the role is doctor, switch to doctor main view
                 if (role.get("role").equals("doctor")) {
                     doctorMainView.switchScreen(primaryStage);
+                } else {
+                    // if the role is nurse, switch to nurse main view, which is the default employee view
+                    nurseMainView.switchScreen(primaryStage);
                 }
-                // if the role is nurse, switch to nurse main view, which is the default employee view
-                nurseMainView.switchScreen(primaryStage);
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
